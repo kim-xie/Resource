@@ -1,0 +1,26 @@
+一、git相关命令行
+	1. git init //初始化仓库
+	2. git add  //添加到本地仓库
+	3. git commit -m '注释内容' //提交到本地仓库
+	4. git remote add origin https://github.com/mr-kings/webpack-demo.git //添加到远程仓库
+	5. git pull--rebase origin master //更新git上的最新版本 (包括两个过程：1、git fetch 2、git merge)
+	6. git push origin master //提交到远程仓库
+
+二、nodejs相关命令行
+	1. npm init  //安装package.json
+	2. npm install ... -g  // -g代表全局安装
+	3. npm install ... -save-dev || -D -S //安装到包依赖中 会自动将package.json中的模块安装到node-modules文件夹下
+	4. webpack-dev-server  //启动webpack服务器
+	5. npm uninstall ...  //卸载模块
+	6. npm update  //更新模块
+	7. npm ls  //查看安装的模块
+	8. npm start //启动
+	9. npm restart  //重起
+	10.npm stop  //停止模块
+	11.npm version  -v//查看版本
+	12.npm test  //测试模块
+	13.npm root  //查看当前包的安装路径
+	14.npm remove ... //移除
+	15.npm install  //安装package.json里的依赖
+	16.npm help  //查看帮助
+	17.npm view ... dependencies  //查看模块依赖
