@@ -1,0 +1,1092 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="assets/css/ace.min.css" />
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+        <link href="Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+        <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+	    <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/typeahead-bs2.min.js"></script>
+		<!-- page specific plugin scripts -->
+		<script src="assets/js/jquery.dataTables.min.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="js/H-ui.js"></script>
+        <script type="text/javascript" src="js/H-ui.admin.js"></script>
+        <script src="assets/layer/layer.js" type="text/javascript" ></script>
+        <script src="assets/laydate/laydate.js" type="text/javascript"></script>
+        <script type="text/javascript" src="Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+        <script src="js/lrtk.js" type="text/javascript" ></script>
+<title>产品列表</title>
+<style>
+.main{width:auto;left:60px;right:0;background:#fff;min-height:100%}
+.main .footer{position:fixed;bottom:0;width:100%;right:0;padding-left:24px;padding-right:40px;background:#f2f2f4}
+.main .footer .returned{margin:10px 0}
+.main .footer button{padding:6px 25px;margin:10px;border-radius:3px}
+.main .footer p{line-height:50px}
+.main .footer .all_pay{line-height:58px}
+.main .footer .footer_left{float:left}.main .footer .footer_left>*{float:left}
+.main .footer .footer_left .return_service{margin-right:10px;background:#a0a0a0;color:#fff;border:1px solid #aaa}
+.main .footer .footer_left p{margin-left:10px;color:#969696}
+.main .footer .print{background:#eaa500;color:#fff;border:1px solid #d3a31e}
+.main .footer .pay{background:#ec6941;color:#fff;border:1px solid #bc411b}
+.main .footer .footer_right{float:right}.main .footer .footer_right>*{float:left}
+.main .footer .footer_right .big{font-size:20px;color:#ea4a3e}
+.main .footer .footer_right .no_pay{margin:0 20px}
+.main .footer .footer_right .all_pay{color:#aaa}
+
+.shortcut-options{margin-bottom:10px;overflow:hidden}
+.shortcut-options span{float:left}
+.shortcut-options ul{overflow:hidden;float:left}
+.shortcut-options li{float:left;margin-left:15px;color:#08c;border-bottom:1px solid #08c;cursor:pointer}
+button, select {background: none; border:none;}
+.right, .fr {float: right;}
+.rp_detail .con_up,.hang_detail .con_up{background:#fff;padding-right:10px}.rp_detail .con_up .row,.hang_detail .con_up .row{margin:0 0 10px 0}.rp_detail .con_up .row .col-sm-7,.hang_detail .con_up .row .col-sm-7{padding:0}
+.rp_detail .con_up .row .col-sm-5,.hang_detail .con_up .row .col-sm-5{padding:0;height:116px;overflow-y:auto;border:1px solid #d9d9d9}
+.rp_detail .con_up .row .cars,.hang_detail .con_up .row .cars{top:49px}
+.rp_detail .con_up .col-sm-5 .table,.hang_detail .con_up .col-sm-5 .table{margin:0}.rp_detail .con_up .col-sm-5 .table thead th,.hang_detail .con_up .col-sm-5 .table thead th{padding:4px;font-weight:normal;border-bottom-width:0;border-color:#d8e5e8;background:#edf7f9}
+.rp_detail .con_up .col-sm-5 .table tbody tr,.hang_detail .con_up .col-sm-5 .table tbody tr{cursor:pointer}
+.rp_detail .con_up .col-sm-5 .table tbody tr:hover,.hang_detail .con_up .col-sm-5 .table tbody tr:hover{background:#ededed}
+.rp_detail .con_up .col-sm-5 .table td,.hang_detail .con_up .col-sm-5 .table td{padding:4px}
+.rp_detail .con_up .col-sm-5 .table td:first-child,.hang_detail .con_up .col-sm-5 .table td:first-child{width:50%}
+.rp_detail .con_up .enter,.hang_detail .con_up .enter,.rp_detail .con_up .get,.hang_detail .con_up .get{float:left}
+.rp_detail .con_up .user-inf,.hang_detail .con_up .user-inf{float:left;min-width:196px}.rp_detail .con_up .user-inf strong,.hang_detail .con_up .user-inf strong{margin-right:15px}
+.rp_detail .con_up .user-inf button,.hang_detail .con_up .user-inf button{color:#08c;text-decoration:underline}
+.rp_detail .con_up .user-inf .level,.hang_detail .con_up .user-inf .level{color:#ea4a3e}
+.rp_detail .con_up .user-card,.hang_detail .con_up .user-card{padding-right:20px;color:#ea4a3e;background:#fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.rp_detail .con_up .user-card:hover,.hang_detail .con_up .user-card:hover{white-space:normal;text-overflow:inherit;overflow:visible}
+.rp_detail .con_up .cart_title,.hang_detail .con_up .cart_title{overflow:hidden;margin-bottom:6px}.rp_detail .con_up .cart_title h3,.hang_detail .con_up .cart_title h3{font-size:24px;float:left;color:#24293d;font-weight:bold}
+.rp_detail .con_up .cart_title p,.hang_detail .con_up .cart_title p{float:left}
+.rp_detail .con_up .cart_title .models,.hang_detail .con_up .cart_title .models{color:#aaa;display:inline-block;padding:3px 10px;border:1px solid #ccc;vertical-align:bottom;margin-left:20px}
+.rp_detail .con_up .cart_title .record,.hang_detail .con_up .cart_title .record{padding:4px 0;margin-left:20px;color:#333}.rp_detail .con_up .cart_title .record span,.hang_detail .con_up .cart_title .record span{color:#ea4a3e}
+.rp_detail .con_up .user,.hang_detail .con_up .user{overflow:hidden}.rp_detail .con_up .user .card,.hang_detail .con_up .user .card{margin-left:30px}.rp_detail .con_up .user .card span,.hang_detail .con_up .user .card span{margin-right:10px}
+.rp_detail .con_up .user .card span:nth-of-type(2),.hang_detail .con_up .user .card span:nth-of-type(2){color:#ea4a3e}
+.rp_detail .con_up .form-inline,.hang_detail .con_up .form-inline{padding-top:15px}
+.rp_detail .con_up .form-inline .form-group,.hang_detail .con_up .form-inline .form-group{margin-right:20px}
+.rp_detail .con_up .other-inf .fr,.hang_detail .con_up .other-inf .fr{float:none;display:inline-block}
+.rp_detail .other-inf,.hang_detail .other-inf{border-top:1px solid #dedede;overflow:hidden;margin-bottom:10px}
+.rp_detail .other-inf ul,.hang_detail .other-inf ul{width:750px;float:left;padding-left:15px}
+.rp_detail .other-inf li,.hang_detail .other-inf li{float:left;line-height:34px;overflow:hidden}
+.rp_detail .other-inf li .control-label,.hang_detail .other-inf li .control-label{width:85px;text-align:right}
+.rp_detail .other-inf li input,.hang_detail .other-inf li input,.rp_detail .other-inf li select,.hang_detail .other-inf li select{width:155px;margin-left:0;}
+.rp_detail .other-inf .message,.hang_detail .other-inf .message{margin:0;padding-top:15px;overflow:hidden}.rp_detail .other-inf .message label,.hang_detail .other-inf .message label{float:left;width:70px;line-height:34px;padding:0 6px 0 0;vertical-align:top;text-align:right}
+.rp_detail .other-inf .message div,.hang_detail .other-inf .message div{overflow:hidden}
+.rp_detail .other-inf .message textarea,.hang_detail .other-inf .message textarea{margin:0;width:100%;height:86px !important}
+.rp_detail .other-inf-static ul,.hang_detail .other-inf-static ul{width:100%}
+.rp_detail .con_down,.hang_detail .con_down{position:relative;padding:10px 10px 100px;background:#fff}.rp_detail .con_down h3,.hang_detail .con_down h3{width:120px;height:30px;background:#84ccc9;line-height:30px;text-align:center;color:#fff;cursor:default}
+.rp_detail .con_down .table,.hang_detail .con_down .table{text-align:center}.rp_detail .con_down .table caption,.hang_detail .con_down .table caption{width:120px;height:30px;line-height:15px;background:#e6e6e6;text-align:center;border:1px solid #ccc;border-bottom:none}
+.rp_detail .con_down .table .new-caption,.hang_detail .con_down .table .new-caption{width:auto;padding:0;text-align:left;background:none;border:0;line-height:30px}.rp_detail .con_down .table .new-caption>span,.hang_detail .con_down .table .new-caption>span{width:120px;height:30px;margin-right:10px;display:inline-block;background:#e6e6e6;text-align:center;border:1px solid #ccc;border-bottom:none}
+.rp_detail .con_down .table .new-caption button,.hang_detail .con_down .table .new-caption button{color:#08c;margin-right:10px}
+.rp_detail .con_down .table .new-caption .materials-bill,.hang_detail .con_down .table .new-caption .materials-bill{height:26px;border-bottom:1px solid #08c}
+.rp_detail .con_down .table thead,.hang_detail .con_down .table thead{background:#efefef}.rp_detail .con_down .table thead th,.hang_detail .con_down .table thead th{text-align:center}
+.rp_detail .con_down .table tbody i,.hang_detail .con_down .table tbody i{position:absolute;top:10px;right:10px;margin:0}
+.rp_detail .con_down .table .td-icon,.hang_detail .con_down .table .td-icon{position:relative}.rp_detail .con_down .table .td-icon input,.hang_detail .con_down .table .td-icon input{width:50px}
+.rp_detail .con_down .table .td-icon .vip,.hang_detail .con_down .table .td-icon .vip{top:2px;right:2px;width:12px;height:12px;background:url(../imges/vip.png);background-size:cover}
+.rp_detail .con_down .table td,.hang_detail .con_down .table td{position:relative}
+.rp_detail .con_down .table td:nth-of-type(2),.hang_detail .con_down .table td:nth-of-type(2){text-align:left}
+.rp_detail .con_down .table .select-technician,.hang_detail .con_down .table .select-technician{cursor:pointer}
+.rp_detail .con_down .table .select-technician:hover,.hang_detail .con_down .table .select-technician:hover{color:#08c}
+.rp_detail .con_down .table i,.hang_detail .con_down .table i{margin-left:10px;cursor:pointer}
+.rp_detail .con_down .project,.hang_detail .con_down .project{width:100%;border:1px solid #fff;padding-left:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.rp_detail .con_down .pay_detail tbody tr td:first-child,.hang_detail .con_down .pay_detail tbody tr td:first-child{width:auto}
+.rp_detail .con_down .pay_detail tbody tr td:nth-of-type(2),.hang_detail .con_down .pay_detail tbody tr td:nth-of-type(2){text-align:right}
+.rp_detail .con_down .table-change tbody tr input,.hang_detail .con_down .table-change tbody tr input{width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0;text-align:center;border:1px solid #fff}
+.rp_detail .chose-project,.hang_detail .chose-project{position:relative}.rp_detail .chose-project input,.hang_detail .chose-project input{text-align:left !important}
+.rp_detail .chose-project .project-list,.hang_detail .chose-project .project-list{width:500px;box-shadow:0 2px 20px #ddd}
+.rp_detail .chose-project .table,.hang_detail .chose-project .table{margin:0}
+.rp_detail .chose-project .project-list tbody tr:hover,.hang_detail .chose-project .project-list tbody tr:hover{cursor:pointer;background:#ddd}
+.rp_detail .chose-project .project-list .table tbody td,.hang_detail .chose-project .project-list .table tbody td{text-align:center}
+.rp_detail .chose-project .project-list tbody td:first-child,.hang_detail .chose-project .project-list tbody td:first-child{width:300px;text-align:left}
+.rp_detail .chose-staff,.hang_detail .chose-staff{position:relative}.rp_detail .chose-staff .staff-list,.hang_detail .chose-staff .staff-list{position:absolute;left:0;top:38px;z-index:99;width:100%;background:#fff;border:1px solid #ddd;box-shadow:0 2px 20px #ddd}
+.rp_detail .chose-staff li,.hang_detail .chose-staff li{line-height:30px;cursor:pointer;border-bottom:1px solid #ddd}
+.rp_detail .chose-staff li:hover,.hang_detail .chose-staff li:hover{background:#eee}
+
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+}
+.car-order-h3 {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+.form-group{position:relative}.form-group .i-red{margin-top:-1px;margin-right:-14px}
+.col-sm-2.control-label{width:100px;min-width:16.66666667%}
+input[type="text"] {
+    padding-left: 5px;
+    background: none;
+}
+label.col-sm-2 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+i-red.i-order {
+    margin-top: -1px;
+    margin-right: -14px;
+}
+.i-red {
+    margin-top: 3px;
+    margin-right: 2px;
+    float: right;
+    font-size: 18px;
+    color: #f00;
+}
+.form-group .i-red {
+    margin-top: -1px;
+    margin-right: -14px;
+}
+</style>
+</head>
+<body>
+<div class=" page-content clearfix">
+  <div id="products_style">
+
+    <div class="search_style">
+      <ul class="search_content clearfix">
+       <li><label class="l_f">客户信息</label><input type="text" class="text_add" placeholder="车牌号/电话/车主姓名"  style=" width:250px"/></li>
+       <li><label class="l_f">开始时间</label><input type="text" class="laydate-icon" placeholder="开始时间" id="start" style=" margin-left:10px; width:240px"></li>
+       <li><label class="l_f">结束时间</label><input type="text" class="laydate-icon" placeholder="结束时间" id="end" style=" margin-left:10px; width:240px"></li>
+       <li><button type="button" class="btn_search" style="width:100px;line-height:28px;"><i class="icon-search"></i>查 询</button></li>
+       <li><button type="button" class="btn_search" style="width:100px;line-height:28px;" id="add_order">开 单</button></li>
+      </ul>
+    </div>
+
+    <div class="main rp_detail car-order ng-scope">
+       <div class="con_up">
+           <div class="row">
+               <div class="col-sm-6" style="float:left;">
+                 <table class="table table-bordered">
+                     <thead>
+                       <tr>
+                           <th>客户姓名</th>
+                           <th>手机号</th>
+                           <th>车牌号</th>
+                           <th>车型</th>
+                           <th>进店次数</th>
+                           <th>消费</th>
+                           <th>未销账</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                           <td>谢先生</td>
+                           <td>18278684822</td>
+                           <td>粤BLM618</td>
+                           <td>奥迪</td>
+                           <td>2</td>
+                           <td>￥300</td>
+                           <td>￥300</td>
+                       </tr>
+                     </tbody>
+                 </table>
+                  <!--  <div class="search-car form-inline" ng-show="isNew">
+                       <input class="form-control inputsearch " type="text" placeholder="搜索车牌" ng-init="showCars=false" ng-focus="showCars=true" ng-blur="showCars=false" ng-model="q.key" ng-change="searchCars()">
+                       <div class="cars ng-hide" ng-show="showCars">
+                           <table class="table">
+                               <tbody>
+
+                               </tbody>
+                           </table>
+                       </div>
+                       <button class="search" ng-click="showCarModal()">新增</button>
+                   </div> -->
+                   <!-- <div class="cart_title">
+                       <h3 ng-show="bill.car.carNumber" class="ng-binding ng-hide"></h3>
+                       <p ng-show="bill.car.modelDetail.description" class="ng-hide">
+                           <strong class="models"><span class="ng-binding"></span></strong>
+                       </p>
+                       <p class="record ng-hide" ng-show="bill &amp;&amp; bill.car">
+                           进店<span class="ng-binding">0</span>次，
+                           消费<span class="ng-binding">￥0</span>&nbsp;&nbsp;
+                           未销账<span class="ng-binding">￥0</span>
+                       </p>
+                   </div>
+                   <div class="user">
+                       <p class="user-inf">
+                           <strong class="name ng-binding"></strong>
+                           <strong class="phone ng-binding"></strong>
+                           <strong class="level ng-binding"></strong>
+                       </p>
+                       <p class="user-card ng-hide" ng-show="bill.memberCard">
+                           <strong class="ng-binding"></strong>
+                           余额,&nbsp;&nbsp; 剩余次数 ：
+                           <span ng-bind-html="bill.memberCard.restCardInfo | htmlContent" class="ng-binding"></span>
+                       </p>
+
+                   </div>-->
+               </div>
+               <div class="col-sm-6" style="float:right;">
+                   <table class="table table-bordered">
+                       <thead>
+                         <tr>
+                             <th>卡内项目</th>
+                             <th>剩余次数</th>
+                             <th>有效期</th>
+                         </tr>
+                       </thead>
+                       <!-- ngRepeat: mem in memberCardInfo -->
+                       <tbody>
+                         <tr>
+                             <td>补胎</td>
+                             <td>2</td>
+                             <td>2017.12.12</td>
+                         </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+           <div class="other-inf">
+               <ul>
+                   <li class="form-inline">
+                       <label class="control-label">送修人</label>
+                       <input class="form-control " type="text" ng-model="bill.customer.customerName">
+                   </li>
+                   <li class="form-inline">
+                       <label class="control-label">手机号</label>
+                       <input class="form-control  ng-valid-maxlength" maxlength="11" type="text" ng-model="bill.customer.customerPhone">
+                   </li>
+                   <li class="form-inline">
+                       <label class="control-label">进店油表</label>
+                       <select class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="bill.oilMeter" number-to-string=""><option value="? string:undefined ?"></option>
+                           <option value="0">空</option>
+                           <option value="1">小于1/4</option>
+                           <option value="2">1/4</option>
+                           <option value="3">1/2</option>
+                           <option value="4">3/4</option>
+                           <option value="5">满</option>
+                       </select>
+                   </li>
+                   <li class="form-inline">
+                       <label class="control-label">进店里程</label>
+                       <input class="form-control " type="text" ng-pattern-restrict="^(?:[0-9]{0,6}(?:\.[0-9]{0,2})?)?$" ng-model="bill.mileage">
+                   </li>
+                   <li class="form-inline">
+                       <label class="control-label">到店时间</label>
+                       <div class="fr">
+                           <label>
+                           <input type="button" class="layui-input form-control" value="选择时间" onclick="laydate({format:'YYYY-MM-DD hh:mm:ss',min:laydate.now(),max:'2099-06-16',istime:false,istoday:true})" style="padding:1px;">
+                           </label>
+                       </div>
+                   </li>
+                   <li class="form-inline">
+                       <label class="control-label">预交车时间</label>
+                       <div class="fr">
+                           <!-- <label ng-bind="bill.planFinishTime" class="ng-binding"></label> -->
+                           <label>
+                           <input type="button" class="layui-input form-control" value="选择时间" onclick="laydate({format:'YYYY-MM-DD hh:mm:ss',min:laydate.now(),max:'2099-06-16',istime:false,istoday:true})" style="padding:1px;">
+                           </label>
+                       </div>
+                   </li>
+               </ul>
+               <div class="message">
+                   <label>车主嘱咐</label>
+                   <div>
+                       <textarea class="form-control " ng-model="bill.remark"></textarea>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="con_down">
+           <div class="shortcut-options">
+               <span>快捷项目：</span>
+               <ul>
+                   <!-- ngRepeat: item in quickAddItems -->
+               </ul>
+           </div>
+           <table class="table table-bordered table-change table-project">
+               <caption class="new-caption">
+                   <span>服务项目</span>
+                   <button id="add_service">+ 新增服务</button>
+                   <strong class="ng-binding">小计：0.00</strong>
+               </caption>
+               <thead>
+               <tr>
+                   <th></th>
+                   <th>服务项目</th>
+                   <th>单价</th>
+                   <th>折扣</th>
+                   <th>数量</th>
+                   <th>小计</th>
+                   <th class="mid-td select-technician">技师
+                       <i class="fa fa-pencil" ng-click="showBillUserDialog(null, 0, true)"></i>
+                   </th>
+                   <th class="mid-td select-technician">业务员
+                       <i class="fa fa-pencil" ng-click="showBillUserDialog(null, 0, false)"></i>
+                   </th>
+               </tr>
+               </thead>
+               <tbody>
+               <!-- ngRepeat: s in bill.billServices -->
+               <tr>
+                   <!--固定搜索行-->
+                   <td></td>
+                   <td class="chose-project">
+                       发动机油泥清洗
+                   </td>
+                   <td class="mid-td">
+                   </td>
+                   <td class="min-td">
+                   </td>
+                   <td class="min-td">
+                   </td>
+                   <td class="mid-td">
+                   </td>
+                   <td class="mid-td">
+                   </td>
+                   <td class="mid-td">
+                   </td>
+               </tr>
+               </tbody>
+           </table>
+           <table class="table table-bordered table-change table-project">
+               <caption class="new-caption">
+                   <span>商品清单</span>
+                   <button id="add_shop">+ 新增商品</button>
+                   <strong class="ng-binding">小计：0.00</strong>
+                   <!--state==0进行中-->
+                   <!--1.8+2.4=4.1999999-->
+                   <button class="materials-bill right ng-hide" ng-click="showMaterialsModal()" ng-show="bill.materialBill.materialGoods.length>0 || bill.stateOption.value==0">
+                       材料单（<span class="ng-binding">0</span>）
+                   </button>
+               </caption>
+               <thead>
+               <tr>
+                   <th></th>
+                   <th>商品项目</th>
+                   <th>单价</th>
+                   <th>折扣</th>
+                   <th>数量</th>
+                   <th>小计</th>
+                   <th class="select-technician">销售员<i class="fa fa-pencil" ng-click="showBillUserDialog(null, 1, false)"></i></th>
+               </tr>
+               </thead>
+               <tbody>
+               <!-- ngRepeat: i in bill.billGoods -->
+               <!--固定搜索行-->
+               <tr>
+                   <td></td>
+                   <td class="chose-project">
+                       发动机油
+                   </td>
+                   <td class="mid-td">
+                   </td>
+                   <td class="min-td">
+                   </td>
+                   <td class="min-td">
+                   </td>
+                   <td class="mid-td">
+                   </td>
+                   <td class="mid-td">
+                   </td>
+               </tr>
+               </tbody>
+           </table>
+
+           <!-- <table class="table table-bordered table-change ng-hide" ng-hide="bill.billMemberCards.length==0">
+               <caption>会员项目</caption>
+               <thead>
+               <tr>
+                   <th></th>
+                   <th>卡种</th>
+                   <th>类型</th>
+                   <th>添加项目</th>
+                   <th>小计</th>
+                   <th class="select-technician">业务员
+                       item, isService, isTechnician
+                       <i class="fa fa-pencil" ng-click="showBillUserDialog(null, 2, false)" ></i>
+                   </th>
+               </tr>
+               </thead>
+               <tbody>
+               ngRepeat: i in bill.billMemberCards track by i.cardId
+               </tbody>
+           </table> -->
+
+           <!--0-进行中, 1-已提车, 2-待结帐, 3-已取消 （必传）-->
+           <div class="footer">
+               <div class="footer_left">
+
+               </div>
+               <div class="footer_right">
+                   <!--<p class="no_pay">总额：-->
+                       <!--<input class="big" type="number" ng-model="bill.paid">-->
+                   <!--</p>-->
+                   <p class="no_pay">总额：
+                       <del ng-show="bill.total != bill.paid" class="ng-binding">¥0.00</del><!-- 不打折隐藏 none -->
+                       <span class="big ng-binding">￥0.00</span>
+                       <i class="fa fa-pencil" ng-click="showMoneyModal()"></i>
+                   </p>
+                   <!-- <button class="print ng-hide" ng-show="!isNew" ng-click="print()">打印结算单</button> -->
+
+                   <!--<div class="btn-group dropup" uib-dropdown keyboard-nav dropdown-append-to="appendToEl">-->
+                       <!--<button id="btn-append-to" type="button" class="print" uib-dropdown-toggle>-->
+                           <!--打印 <span class="caret"></span>-->
+                       <!--</button>-->
+                       <!--<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to">-->
+                           <!--<li role="menuitem">-->
+                               <!--<a ng-show="!isNew" ng-click="print('settlement')">打印结算单</a>-->
+                           <!--</li>-->
+                           <!--<li role="menuitem">-->
+                               <!--<a ng-click="print('offer')">打印报价单</a>-->
+                           <!--</li>-->
+                           <!--<li role="menuitem">-->
+                               <!--<a ng-click="print('material')">打印材料单</a>-->
+                           <!--</li>-->
+                           <!--<li role="menuitem">-->
+                               <!--<a ng-click="print('dispatch')">打印派工单</a>-->
+                           <!--</li>-->
+                           <!--<li role="menuitem">-->
+                               <!--<a ng-click="print('receipt')">打印小票结算单</a>-->
+                           <!--</li>-->
+                       <!--</ul>-->
+                   <!--</div>-->
+                   <button class="pay" ng-show="isNew" ng-click="reception()">接待</button>
+
+                   <!-- <button class="pay ng-hide" ng-show="bill.stateOption.value==0" ng-click="update2PayingState()">提交结账</button>
+                   <button class="pay ng-hide" ng-show="bill.stateOption.value==0" ng-click="editItem()">保存报价</button>
+
+                   <button class="pay ng-hide" ng-show="isShowPaidButton &amp;&amp; bill.stateOption.value==2" ui-sref="reception-pay({billId:bill.billId, clientId:bill.client.clientId})" href="#/reception-pay//">结账</button> -->
+
+               </div>
+           </div>
+       </div>
+    </div>
+
+  </div>
+</div>
+
+<!--开单图层-->
+<div class="add_order" id="add_order_style" style="display:none">
+  <div class="modal-body">
+          <form class="form-horizontal ng-pristine ng-valid ng-valid-maxlength">
+              <h3 class="car-order-h3">车辆信息</h3>
+              <div>
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label" style="width:88px;">
+                              车牌号<i class="i-red i-order">*</i>
+                          </label>
+                          <div class="col-sm-9">
+                              <input class="form-control" maxlength="7" type="text" placeholder="输入车牌号" style="margin-left:12px;width:100%;">
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">车架号</label>
+                          <div class="col-sm-9">
+                              <input class="form-control" type="text" maxlength="17" placeholder="输入车架号" style="margin-left:0px;width:100%;">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">车辆品牌</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" style="margin-left:0px;width:100%;">
+                                <option value="请选择品牌">请选择品牌</option>
+                                <option value="0">奥迪</option>
+                                <option value="1">奔驰</option>
+                                <option value="2">大众</option>
+                                <option value="3">别克</option>
+                                <option value="4">宝马</option>
+                                <option value="5">雪铁龙</option>
+                            </select>
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">车辆类型</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                                <option value="请选择车型">请选择车型</option>
+                                <option value="0">奥迪A3</option>
+                                <option value="1">奥迪A4</option>
+                                <option value="2">奥迪A4L</option>
+                                <option value="3">奥迪A6</option>
+                                <option value="4">奥迪A6L</option>
+                                <option value="5">奥迪Q3</option>
+                            </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">车辆注册时间</label>
+                          <div class="col-sm-9">
+                               <input type="button" class="layui-input form-control" onclick="laydate({format:'YYYY-MM-DD hh:mm:ss',min:laydate.now(),max:'2099-06-16',istime:false,istoday:true})" placeholder="车辆注册时间" style="padding:1px;">
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">发动机号</label>
+                          <div class="col-sm-9">
+                              <input class="form-control" maxlength="30" type="text" placeholder="输入发动机号" style="margin-left:0px;">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">商业险到期日</label>
+                          <div class="col-sm-9">
+                               <input type="button" class="layui-input form-control" onclick="laydate({format:'YYYY-MM-DD hh:mm:ss',min:laydate.now(),max:'2099-06-16',istime:false,istoday:true})" placeholder="商业险到期日" style="padding:1px;">
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">承保公司</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                                <option value="请选择承保公司"></option>
+                                <option value="0">平安车辆保险</option>
+                                <option value="1">中国人保车辆保险</option>
+                                <option value="2">太平洋车辆保险</option>
+                                <option value="3">中华联合车辆保险</option>
+                                <option value="4">大地车辆保险</option>
+                                <option value="5">天安车辆保险</option>
+                            </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">交强险到期日</label>
+                          <div class="col-sm-9">
+                              <input type="button" class="layui-input form-control" onclick="laydate({format:'YYYY-MM-DD hh:mm:ss',min:laydate.now(),max:'2099-06-16',istime:false,istoday:true})" style="padding:1px;">
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">承保公司</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" placeholder="">
+                              <option value="请选择承保公司"></option>
+                              <option value="0">平安车辆保险</option>
+                              <option value="1">中国人保车辆保险</option>
+                              <option value="2">太平洋车辆保险</option>
+                              <option value="3">中华联合车辆保险</option>
+                              <option value="4">大地车辆保险</option>
+                              <option value="5">天安车辆保险</option>
+                            </select>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <h3 class="car-order-h3">客户信息</h3>
+              <div>
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">客户姓名</label>
+                          <div class="col-sm-9">
+                              <input maxlength="30" class="form-control" type="text" placeholder="输入客户姓名" style="margin-left:0px;width:100%;">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label" style="padding-top:3px;">客户类型</label>
+                          <div class="col-sm-9">
+                            <span class="add_name">
+                              <label><input name="form-field-radio1" type="radio" checked="checked" class="ace"><span class="lbl">个人</span></label>&nbsp;&nbsp;&nbsp;
+                              <label><input name="form-field-radio1" type="radio" class="ace"><span class="lbl">单位</span></label>&nbsp;&nbsp;&nbsp;
+                            </span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label" style="padding-top:3px;">客户性别</label>
+                          <div class="col-sm-9">
+                            <span class="add_name">
+                              <label><input name="form-field-radio" type="radio" checked="checked" class="ace"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <label><input name="form-field-radio" type="radio" class="ace"><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <div class="prompt r_f"></div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">客户手机</label>
+                          <div class="col-sm-9">
+                              <input class="form-control " maxlength="11" type="text" placeholder="输入客户手机号" style="margin-left:0px;">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-sm-6">
+                          <label class="col-sm-2 control-label">客户级别</label>
+                          <div class="col-sm-9">
+                              <select class="form-control" >
+                                <option value="? undefined:undefined ?"></option>
+                                  <!-- ngRepeat: level in clientLevelList -->
+                                  <option value="0" ng-repeat="level in clientLevelList" class="ng-binding ng-scope">
+                                      A级
+                                  </option><!-- end ngRepeat: level in clientLevelList -->
+                                  <option value="1" ng-repeat="level in clientLevelList" class="ng-binding ng-scope">
+                                      B级
+                                  </option><!-- end ngRepeat: level in clientLevelList -->
+                                  <option value="2" ng-repeat="level in clientLevelList" class="ng-binding ng-scope">
+                                      C级
+                                  </option><!-- end ngRepeat: level in clientLevelList -->
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+ </div>
+
+
+ <!--新增服务图层-->
+ <div class="add_service" id="add_service_style" style="display:none">
+    <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" style="margin-left:0px;width:100%;">
+                    </div>
+                </div>
+            </form>
+            <form class="form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属大类</label>
+                    <div class="col-sm-9">
+                        <select class="form-control " ng-change="firstCategoryChange()" ng-model="m.firstCategoryId">
+                            <option value="">请选择</option>
+                            <!-- ngRepeat: c in special.categories -->
+                            <option ng-repeat="c in special.categories" value="35261" class="ng-binding ng-scope"> 汽车保养</option>
+                            <!-- end ngRepeat: c in special.categories -->
+                            <option ng-repeat="c in special.categories" value="35272" class="ng-binding ng-scope"> 汽车深度保养</option>
+                            <!-- end ngRepeat: c in special.categories -->
+                            <option ng-repeat="c in special.categories" value="35274" class="ng-binding ng-scope"> 洗车美容</option>
+                            <!-- end ngRepeat: c in special.categories -->
+                            <option ng-repeat="c in special.categories" value="35293" class="ng-binding ng-scope"> 钣金喷漆</option>
+                            <!-- end ngRepeat: c in special.categories -->
+                            <option ng-repeat="c in special.categories" value="35294" class="ng-binding ng-scope"> 待分类</option>
+                            <!-- end ngRepeat: c in special.categories -->
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <form class="form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属细类</label>
+                    <div class="col-sm-9">
+                        <select ng-model="m.secondCategoryId" class="form-control">
+                            <option value="">请选择</option>
+                            <!-- ngRepeat: sub in subCategories -->
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <form class="form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">售价</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" ng-model="m.price" string-to-number="" style="margin-left:0px;width:100%;">
+                    </div>
+                </div>
+            </form>
+            <form class="form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="m.description" style="margin-left:0px;width:100%;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <style>
+    label {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .goods-modal .form-group {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .goods-modal .col-sm-6 {
+        padding: 0;
+    }
+    .goods-modal .form-label {
+        display: inline-block;
+        height: 32px;
+        line-height: 32px;
+        width: 110px;
+        text-align: right;
+    }
+    .goods-modal .form-control {
+        width: 240px;
+    }
+    input[type="text"] {
+        padding-left: 5px;
+        background: none;
+    }
+    .form-group .i-red {
+        margin-top: 3px;
+        margin-right: -14px;
+    }
+    </style>
+    <!--新增商品图层-->
+    <div class="add_shop" id="add_shop_style" style="display:none">
+      <div class="modal-body goods-modal" style="text-align:center;">
+            <form class="form-inline">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="form-label">商品名称<i class="i-red">*</i></label>
+                        <input type="text" class="form-control" placeholder="请输入商品名称">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">商品别称</label>
+                        <input type="text" class="form-control" placeholder="商品别称，车主报价时显示">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="form-label">所属分类<i class="i-red">*</i></label>
+                        <select class="form-control" style="margin-left:10px;">
+                            <option value="? undefined:undefined ?"></option>
+                            <option value="0">机油</option>
+                            <option value="1">滤清器</option>
+                            <option value="2">节气门</option>
+                            <option value="3">汽油</option>
+                            <option value="4">马达</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">商品售价<i class="i-red">*</i></label>
+                        <input type="text" class="form-control" placeholder="请输入商品售价">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="form-label">厂商类型</label>
+                        <select class="form-control" style="margin-left:10px;">
+                            <option value="? undefined:undefined ?"></option>
+                            <option value="0">原厂原装</option>
+                            <option value="1">国内品牌</option>
+                            <option value="2">国外品牌</option>
+                            <option value="3">副厂</option>
+                            <option value="4">拆车</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">商品产地</label>
+                        <input type="text" class="form-control " placeholder="请输入产地" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="form-label">商品编码</label>
+                        <input type="text" class="form-control" placeholder="请输入商品编码" ng-model="m.goodsCode">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">条形码</label>
+                        <input type="text" class="form-control" placeholder="请输入条形码" ng-model="m.barCode">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="form-label">商品品牌</label>
+                        <input type="text" class="form-control " placeholder="请输入品牌" ng-model="m.brandName">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">商品单位</label>
+                        <input type="text" class="form-control " placeholder="请输入单位" ng-model="m.unit">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="form-label">库存预警值</label>
+                        <input type="text" class="form-control " placeholder="输入预警值，为空时不预警" ng-model="m.alarmNum">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">适用车型</label>
+                        <input type="text" class="form-control " placeholder="请输入适用车型" ng-model="m.matchCarType">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="form-label" style="width:12%;padding-right: 0px;">备注</label>
+                        <textarea class="form-control " placeholder="请输入本商品备注" style="width:81%;margin-left:20px;"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+
+</body>
+</html>
+<script>
+jQuery(function($) {
+		var oTable1 = $('#sample-table').dataTable( {
+  		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+  		"bStateSave": true,//状态保存
+  		"aoColumnDefs": [
+  		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+  		  {"orderable":false,"aTargets":[0,2,3,4,5,8,9]}// 制定列不参与排序
+  		]
+    });
+
+
+		$('table th input:checkbox').on('click' , function(){
+			var that = this;
+			$(this).closest('table').find('tr > td:first-child input:checkbox')
+			.each(function(){
+				this.checked = that.checked;
+				$(this).closest('tr').toggleClass('selected');
+			});
+		});
+
+	  $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+  	function tooltip_placement(context, source) {
+  		var $source = $(source);
+  		var $parent = $source.closest('table')
+  		var off1 = $parent.offset();
+  		var w1 = $parent.width();
+  		var off2 = $source.offset();
+  		var w2 = $source.width();
+  		if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+  		return 'left';
+  	}
+});
+
+var startDate = {
+			  elem: '#start',
+			  format: 'YYYY-MM-DD hh:mm:ss',
+			  min: laydate.now(), //设定最小日期为当前日期
+			  max: '2099-06-16', //最大日期
+			  istime: true,
+			  istoday: false,
+			  fixed: true,
+			  choose: function(datas){
+				  endDate.min = datas; //开始日选好后，重置结束日的最小日期
+				  endDate.start = datas; //将结束日的初始值设定为开始日
+			  }
+			};
+	var endDate = {
+			  elem: '#end',
+			  format: 'YYYY-MM-DD hh:mm:ss',
+			  min: laydate.now(),
+			  max: '2099-06-16',
+			  istime: true,
+			  istoday: false,
+			  choose: function(datas){
+				    endDate.max = datas; //结束日选好后，重置开始日的最大日期
+			  }
+			};
+	laydate(startDate);
+	laydate(endDate);
+
+   /*维修开单*/
+   $('#add_order').on('click', function(){
+      layer.open({
+          type: 1,
+          title: '请填写维修单',
+  		    maxmin: true,
+  		    shadeClose: true, //点击遮罩关闭层
+          area : ['60%' , ''],
+          content:$('#add_order_style'),
+  		    btn:['提交','取消'],
+  		    yes:function(index,layero){
+        		 var num=0;
+        		 var str="";
+             $(".add_order input[type$='text']").each(function(n){
+               if($(this).val()==""){
+  			            layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
+                                title: '提示框',
+  				                      icon:0,
+                    });
+  		              num++;
+                    return false;
+                }
+  		       });
+      		  if(num>0){  return false;}	else{
+      			  layer.alert('添加成功！',{
+                     title: '提示框',
+      			         icon:1,
+      			  });
+      			  layer.close(index);
+      		  }
+      		}
+      });
+  });
+
+
+  /*新增服务*/
+  $('#add_service').on('click', function(){
+     layer.open({
+         type: 1,
+         title: '新增服务项目',
+         maxmin: true,
+         shadeClose: true, //点击遮罩关闭层
+         area : ['40%' , ''],
+         content:$('#add_service_style'),
+         btn:['提交','取消'],
+         yes:function(index,layero){
+            var num=0;
+            var str="";
+            $(".add_service input[type$='text']").each(function(n){
+              if($(this).val()==""){
+                   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
+                               title: '提示框',
+                               icon:0,
+                   });
+                   num++;
+                   return false;
+               }
+            });
+           if(num>0){  return false;}	else{
+             layer.alert('添加成功！',{
+                    title: '提示框',
+                    icon:1,
+             });
+             layer.close(index);
+           }
+         }
+     });
+ });
+
+ /*新增商品*/
+ $('#add_shop').on('click', function(){
+    layer.open({
+        type: 1,
+        title: '新增商品',
+        maxmin: true,
+        shadeClose: true, //点击遮罩关闭层
+        area : ['50%' , ''],
+        content:$('#add_shop_style'),
+        btn:['提交','取消'],
+        yes:function(index,layero){
+           var num=0;
+           var str="";
+           $(".add_service input[type$='text']").each(function(n){
+             if($(this).val()==""){
+                  layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
+                              title: '提示框',
+                              icon:0,
+                  });
+                  num++;
+                  return false;
+              }
+           });
+          if(num>0){  return false;}	else{
+            layer.alert('添加成功！',{
+                   title: '提示框',
+                   icon:1,
+            });
+            layer.close(index);
+          }
+        }
+    });
+});
+
+$(function() {
+	$("#products_style").fix({
+		  float : 'left',
+		  //minStatue : true,
+		  skin : 'green',
+		  durationTime :false,
+		  spacingw:30,//设置隐藏时的距离
+	    spacingh:260,//设置显示时间距
+	});
+});
+</script>
+
+<script type="text/javascript">
+    //初始化宽度、高度
+    $(".widget-box").height($(window).height()-215);
+    $(".table_menu_list").width($(window).width()-260);
+    $(".table_menu_list").height($(window).height()-215);
+    //当文档窗口发生改变时 触发
+    $(window).resize(function(){
+	     $(".widget-box").height($(window).height()-215);
+	     $(".table_menu_list").width($(window).width()-260);
+	     $(".table_menu_list").height($(window).height()-215);
+    });
+
+    var code;
+
+    function showCode(str) {
+    	if (!code) code = $("#code");
+    	code.empty();
+    	code.append("<li>"+str+"</li>");
+    }
+
+    $(document).ready(function(){
+    	var t = $("#treeDemo");
+    	t = $.fn.zTree.init(t, setting, zNodes);
+    	demoIframe = $("#testIframe");
+    	demoIframe.bind("load", loadReady);
+    	var zTree = $.fn.zTree.getZTreeObj("tree");
+    	zTree.selectNode(zTree.getNodeByParam("id",'11'));
+    });
+
+    /*产品-停用*/
+    function member_stop(obj,id){
+    	layer.confirm('确认要停用吗？',function(index){
+    		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
+    		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+    		$(obj).remove();
+    		layer.msg('已停用!',{icon: 5,time:1000});
+    	});
+    }
+
+    /*产品-启用*/
+    function member_start(obj,id){
+    	layer.confirm('确认要启用吗？',function(index){
+    		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
+    		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+    		$(obj).remove();
+    		layer.msg('已启用!',{icon: 6,time:1000});
+    	});
+    }
+    /*产品-编辑*/
+    function member_edit(title,url,id,w,h){
+    	layer_show(title,url,w,h);
+    }
+
+    /*产品-删除*/
+    function member_del(obj,id){
+    	layer.confirm('确认要删除吗？',function(index){
+    		$(obj).parents("tr").remove();
+    		layer.msg('已删除!',{icon:1,time:1000});
+    	});
+    }
+    //面包屑返回值
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.iframeAuto(index);
+    $('.Order_form').on('click', function(){
+    	var cname = $(this).attr("title");
+    	var chref = $(this).attr("href");
+    	var cnames = parent.$('.Current_page').html();
+    	var herf = parent.$("#iframe").attr("src");
+      parent.$('#parentIframe').html(cname);
+      parent.$('#iframe').attr("src",chref).ready();;
+    	parent.$('#parentIframe').css("display","inline-block");
+    	parent.$('.Current_page').attr({"name":herf,"href":"javascript:void(0)"}).css({"color":"#4c8fbd","cursor":"pointer"});
+    	//parent.$('.Current_page').html("<a href='javascript:void(0)' name="+herf+" class='iframeurl'>" + cnames + "</a>");
+      parent.layer.close(index);
+
+    });
+</script>

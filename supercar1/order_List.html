@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="assets/css/ace.min.css" />
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+        <link href="Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+        <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+	    <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/typeahead-bs2.min.js"></script>
+		<!-- page specific plugin scripts -->
+		<script src="assets/js/jquery.dataTables.min.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="js/H-ui.js"></script>
+        <script type="text/javascript" src="js/H-ui.admin.js"></script>
+        <script src="assets/layer/layer.js" type="text/javascript" ></script>
+        <script src="assets/laydate/laydate.js" type="text/javascript"></script>
+        <script type="text/javascript" src="Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+        <script src="js/lrtk.js" type="text/javascript" ></script>
+<title>产品列表</title>
+<style>
+.hang_down{margin-top:10px;overflow:hidden}
+.hang_down .container-fluid{padding:0;overflow:hidden}
+.hang_down .hang{overflow:hidden}
+.hang_down .hang button{margin-right:5px;padding:8px 15px;color:#999;background:#f9f9f9;border:1px solid #e0e0e0;border-bottom:none;border-radius:3px 3px 0 0}
+.hang_down .hang .current{background:#2eb0b8;color:#fff;border:1px solid #279da4;border-bottom:none}
+.hang_down .all_hang{background:#fff;text-align:center}
+.hang_down .all_hang .details{display:none}
+.hang_down .all_hang .second_table{padding:0 5px;margin-bottom:0}
+.hang_down .all_hang .second_table .b-top-none td{border-top:none}
+.hang_down .all_hang .second_table label{margin-bottom:-2px}
+.hang_down .all_hang .second_table td{border-bottom:1px solid #ddd;max-width:400px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;text-align:left}
+.hang_down .all_hang .second_table .details_td{color:#999;white-space:nowrap}
+.hang_down .all_hang .hang_primary{padding:0;width:40px}
+.hang_down .all_hang .text-primary{color:#08c;margin-top:6px;cursor:pointer}
+.single_losses,.hang .cleared,.hang .to_checked,.hang .pick_car,.hang .put_car{display:none}
+.page{overflow:hidden;background:#fff;margin:20px 0}.page ul{overflow:hidden;width:520px;margin:0 auto}.page ul li{padding:4px 15px;float:left;border:1px solid #ececec;color:#666;margin-right:10px;cursor:pointer;border-radius:3px}.page ul li .blue{color:#339feb}
+.page p{text-align:center;margin-top:10px}
+.page p strong{color:#f00}
+</style>
+</head>
+<body>
+<div class=" page-content clearfix">
+  <div id="products_style">
+
+    <div class="search_style">
+      <ul class="search_content clearfix">
+       <li><label class="l_f">客户信息</label><input type="text" class="text_add" placeholder="车牌号/电话/车主姓名"  style=" width:180px"/></li>
+       <li>
+         <label class="l_f" style="margin-right:10px;">维修性质</label>
+         <select class="form-control" style="width:180px;padding:0;height:30px;">
+           <option value="0">小修</option>
+           <option value="1">洗车</option>
+           <option value="2">保养</option>
+           <option value="3">钣工</option>
+           <option value="4">精洗</option>
+           <option value="5">事故</option>
+         </select>
+       </li>
+       <li><label class="l_f">开始时间</label><input type="text" class="laydate-icon" placeholder="开始时间" id="start" style=" margin-left:10px; width:240px"></li>
+       <li><label class="l_f">结束时间</label><input type="text" class="laydate-icon" placeholder="结束时间" id="end" style=" margin-left:10px; width:240px"></li>
+       <li><button type="button" class="btn_search" style="width:100px;line-height:28px;"><i class="icon-search"></i>查 询</button></li>
+      </ul>
+    </div>
+
+     <!--产品列表展示-->
+     <div class="hang_down" id="all_Reception">
+        <div class="hang" id="car-category">
+          <!--0表进行中，1表已提车， 2表待结账 3 已取消-->
+          <button ng-click="initStateReception(0)" class="col-sm-3 ng-binding" ng-class="{current : q.state==0}">
+            服务中 <i></i></button>
+          <button ng-click="initStateReception(2)" class="col-sm-3 ng-binding" ng-class="{current : q.state==2}">
+            待结账 <i></i></button>
+          <button ng-click="initStateReception(1)" class="col-sm-2 ng-binding" ng-class="{current : q.state==1}">
+            已结账 <i></i></button>
+          <button ng-click="initStateReception(4)" class="col-sm-2 ng-binding current" ng-class="{current : q.state==4}">
+            全部 (1)<i></i></button>
+        </div>
+        <div class="container-fluid" id="Reception">
+          <div class="in_service">
+            <div class="all_hang">
+              <table class="table table-bordered table-change ">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>车牌</th>
+                  <th>车型</th>
+                  <th>开单时间</th>
+                  <th>预交车时间</th>
+                  <th>总额</th>
+                  <th>状态</th>
+                  <th ng-show="q.state==2 || q.state==4" class="">操作</th>
+                </tr>
+                </thead>
+                <!-- ngRepeat: item in list --><tbody class="hang_fluid_tb ng-scope" ng-repeat="item in list">
+
+                  <tr>
+                    <td class="hang_primary"><i class="fa fa-plus-square-o text-primary"></i></td>
+                    <!-- ngIf: item.state!=0 -->
+                    <!-- ngIf: item.state==0 --><td class="cart_title ng-scope" ng-if="item.state==0"><a ui-sref="reception-edit({billId:item.billId})" class="ng-binding" href="#/reception-edit/371005">甘A33333</a></td><!-- end ngIf: item.state==0 -->
+                    <td class="mold ng-binding">宝骏630</td>
+                    <td class="billing_time ng-binding">2017-04-25 17:38:31</td>
+                    <td class="estimate_time ng-binding">2017-04-25 18:08:00</td>
+                    <td class="harvest ng-binding">¥ 108.00</td>
+
+                    <!--0表进行中，1表已提车， 2表待结账-->
+                    <td class="settled" ng-switch="item.stateOption.value">
+                      <!-- ngSwitchWhen: 0 --><span ng-switch-when="0" class="ng-scope">服务中</span><!-- end ngSwitchWhen: -->
+                      <!-- ngSwitchWhen: 1 -->
+                      <!-- ngSwitchWhen: 2 -->
+                      <!-- ngSwitchWhen: 3 -->
+                    </td>
+
+                    <td ng-show="q.state==2 || q.state==4" class="checkout">
+                      <button ng-show="item.stateOption.value!=2" class=""></button>
+                      <!--<button ng-show="item.stateOption.value==2" ng-click="showPayDialog(item)" class="btn btn-warning">结账</button>-->
+                      <a ng-show="item.stateOption.value==2" ui-sref="reception-pay({billId:item.billId, clientId:item.client.clientId})" href="#/reception-pay/371005/96458" class="ng-hide">
+                         <button class="btn btn-warning">结账</button></a>
+                    </td>
+                  </tr>
+                  <tr class="details">
+                    <td colspan="8">
+                      <table class="table second_table" cellspacing="1">
+                        <tbody>
+                        <tr class="b-top-none">
+                          <td class="details_td"><label>联系人：</label></td>
+                          <td class="ng-binding">李 15693314776</td>
+                          <td class="details_td"><label>嘱咐：</label></td>
+                          <td class="ng-binding">无</td>
+                        </tr>
+                        <tr>
+                          <td class="details_td"><label>服务明细：</label>
+                          </td>
+                          <td colspan="4">
+                            <!-- ngRepeat: service in item.billServices --><span ng-repeat="service in item.billServices" class="ng-binding ng-scope">发动机油泥清洗、</span><!-- end ngRepeat: service in item.billServices -->
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+
+
+                </tbody><!-- end ngRepeat: item in list -->
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="page">
+          <ul>
+            <li ng-click="firstPage()">首页</li>
+            <li ng-click="previousPage()">上一页</li>
+            <li>第 <span class="blue ng-binding">1</span> 页</li>
+            <li ng-click="nextPage()">下一页</li>
+            <li ng-click="lastPage()">末页</li>
+            <li class="ng-binding">共1页</li>
+          </ul>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+</body>
+</html>
+<script>
+jQuery(function($) {
+		var oTable1 = $('#sample-table').dataTable( {
+  		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+  		"bStateSave": true,//状态保存
+  		"aoColumnDefs": [
+  		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+  		  {"orderable":false,"aTargets":[0,2,3,4,5,8,9]}// 制定列不参与排序
+  		]
+    });
+
+
+		$('table th input:checkbox').on('click' , function(){
+			var that = this;
+			$(this).closest('table').find('tr > td:first-child input:checkbox')
+			.each(function(){
+				this.checked = that.checked;
+				$(this).closest('tr').toggleClass('selected');
+			});
+		});
+
+	  $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+  	function tooltip_placement(context, source) {
+  		var $source = $(source);
+  		var $parent = $source.closest('table')
+  		var off1 = $parent.offset();
+  		var w1 = $parent.width();
+  		var off2 = $source.offset();
+  		var w2 = $source.width();
+  		if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+  		return 'left';
+  	}
+});
+
+var startDate = {
+			  elem: '#start',
+			  format: 'YYYY-MM-DD hh:mm:ss',
+			  min: laydate.now(), //设定最小日期为当前日期
+			  max: '2099-06-16', //最大日期
+			  istime: true,
+			  istoday: false,
+			  fixed: true,
+			  choose: function(datas){
+				  endDate.min = datas; //开始日选好后，重置结束日的最小日期
+				  endDate.start = datas; //将结束日的初始值设定为开始日
+			  }
+			};
+	var endDate = {
+			  elem: '#end',
+			  format: 'YYYY-MM-DD hh:mm:ss',
+			  min: laydate.now(),
+			  max: '2099-06-16',
+			  istime: true,
+			  istoday: false,
+			  choose: function(datas){
+				    endDate.max = datas; //结束日选好后，重置开始日的最大日期
+			  }
+			};
+	laydate(startDate);
+	laydate(endDate);
+
+$(function() {
+	$("#products_style").fix({
+		  float : 'left',
+		  //minStatue : true,
+		  skin : 'green',
+		  durationTime :false,
+		  spacingw:30,//设置隐藏时的距离
+	    spacingh:260,//设置显示时间距
+	});
+});
+</script>
+
+<script type="text/javascript">
+    //初始化宽度、高度
+    $(".widget-box").height($(window).height()-215);
+    $(".table_menu_list").width($(window).width()-260);
+    $(".table_menu_list").height($(window).height()-215);
+    //当文档窗口发生改变时 触发
+    $(window).resize(function(){
+	     $(".widget-box").height($(window).height()-215);
+	     $(".table_menu_list").width($(window).width()-260);
+	     $(".table_menu_list").height($(window).height()-215);
+    });
+
+    var code;
+
+    function showCode(str) {
+    	if (!code) code = $("#code");
+    	code.empty();
+    	code.append("<li>"+str+"</li>");
+    }
+
+    $(document).ready(function(){
+    	var t = $("#treeDemo");
+    	t = $.fn.zTree.init(t, setting, zNodes);
+    	demoIframe = $("#testIframe");
+    	demoIframe.bind("load", loadReady);
+    	var zTree = $.fn.zTree.getZTreeObj("tree");
+    	zTree.selectNode(zTree.getNodeByParam("id",'11'));
+    });
+
+    /*产品-停用*/
+    function member_stop(obj,id){
+    	layer.confirm('确认要停用吗？',function(index){
+    		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
+    		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+    		$(obj).remove();
+    		layer.msg('已停用!',{icon: 5,time:1000});
+    	});
+    }
+
+    /*产品-启用*/
+    function member_start(obj,id){
+    	layer.confirm('确认要启用吗？',function(index){
+    		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
+    		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+    		$(obj).remove();
+    		layer.msg('已启用!',{icon: 6,time:1000});
+    	});
+    }
+    /*产品-编辑*/
+    function member_edit(title,url,id,w,h){
+    	layer_show(title,url,w,h);
+    }
+
+    /*产品-删除*/
+    function member_del(obj,id){
+    	layer.confirm('确认要删除吗？',function(index){
+    		$(obj).parents("tr").remove();
+    		layer.msg('已删除!',{icon:1,time:1000});
+    	});
+    }
+    //面包屑返回值
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.iframeAuto(index);
+    $('.Order_form').on('click', function(){
+    	var cname = $(this).attr("title");
+    	var chref = $(this).attr("href");
+    	var cnames = parent.$('.Current_page').html();
+    	var herf = parent.$("#iframe").attr("src");
+      parent.$('#parentIframe').html(cname);
+      parent.$('#iframe').attr("src",chref).ready();;
+    	parent.$('#parentIframe').css("display","inline-block");
+    	parent.$('.Current_page').attr({"name":herf,"href":"javascript:void(0)"}).css({"color":"#4c8fbd","cursor":"pointer"});
+    	//parent.$('.Current_page').html("<a href='javascript:void(0)' name="+herf+" class='iframeurl'>" + cnames + "</a>");
+      parent.layer.close(index);
+
+    });
+</script>

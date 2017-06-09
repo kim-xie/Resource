@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+        <link href="assets/css/codemirror.css" rel="stylesheet">
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+        <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+		<script src="assets/js/ace-extra.min.js"></script>
+		<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+        		<!--[if !IE]> -->
+		<script src="assets/js/jquery.min.js"></script>
+		<!-- <![endif]-->
+           	<script src="assets/dist/echarts.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+
+
+       <title>无标题文档</title>
+       </head>
+			 <style>
+				button, select {
+					 background: none;
+					 border: none;
+				}
+			 	.gradient-button span {
+	 			    width: 108px;
+	 			    height: 38px;
+	 			    border-radius: 54px;
+	 			    display: inline-block;
+	 			    background: #fff;
+ 				}
+				.gradient-button {
+				    margin-top: 15px;
+				    margin-right: 20px;
+				    width: 110px;
+				    height: 40px;
+				    line-height: 40px;
+				    border-radius: 55px;
+				    padding: 1px;
+				    overflow: hidden;
+				    background: -webkit-linear-gradient(left, #8863ff, #098dff);
+				    background: -o-linear-gradient(left, #8863ff, #098dff);
+				    background: linear-gradient(to right, #8863ff, #098dff);
+				}
+			 .page-content .index-path{padding:15px;overflow:hidden}
+			 .page-content .index-path .path-item{position:relative;width:22%;float:left}
+			 .page-content .index-path .path-item .path-arr{position:absolute;top:19px;left:70px;right:5px;height:2px;background:#d6e8fe}
+			 .page-content .index-path .path-item .path-arr:after{content:'';position:absolute;right:2px;top:-7px;transform:rotate(-45deg);width:16px;height:16px;border-right:3px solid #d6e8fe;border-bottom:3px solid #d6e8fe}
+			.page-content .index-path .path-item p{margin-top:6px}
+			.page-content .index-path .path-item p span:first-child{margin:0 5px}
+			.page-content .index-path .path-item .m-c{color:#1e00d6}
+			.page-content .index-path .path-item:nth-of-type(5){width:80px}
+			.page-content .index-path .path-item:nth-of-type(6){width:100%;height:100px}
+			.page-content .index-path .path-item:nth-of-type(6) .path-arr02{position:absolute;left:44%;margin-left:35px;top:5px;bottom:0;width:2px;background:rgba(20,124,250,0.2)}
+			.page-content .index-path .path-item:nth-of-type(6) .path-arr02:after{content:'';position:absolute;right:-7px;top:0;transform:rotate(-135deg);width:16px;height:16px;border-right:3px solid rgba(20,124,250,0.2);border-bottom:3px solid rgba(20,124,250,0.2)}
+			.page-content .index-path .gradient-button{width:70px;margin:0}
+			.page-content .index-path .gradient-button span{width:68px}
+			.page-content .index-graph{float:left;width:60%;height:360px;border:1px solid #ebebeb;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-radius:4px;overflow:hidden}
+			.page-content .index-graph header{height:60px}
+			.page-content .index-graph header .right{float:right;margin:20px 0 10px 0;font-size:12px;line-height:25px}
+			.page-content .index-graph header .right .gradient-button{margin-right:20px;margin-top:0;width:50px;height:25px;line-height:25px;border-radius:12px}
+			.page-content .index-graph header .right .gradient-button span{width:48px;height:23px;border-radius:12px}
+			.page-content .current{background:-webkit-linear-gradient(left, #ff7000, #ff5200)}
+			.page-content .current span{background:none;color:#fff}
+			.page-content #business-summary{height:330px}
+
+
+			 </style>
+<body>
+<div class="page-content clearfix">
+ <div class="alert alert-block alert-success">
+  <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+  <i class="icon-ok green"></i>欢迎使用<strong class="green">后台管理系统<small>(v1.0.0)</small></strong>,你本次登陆时间为2017年5月12日13时34分，登陆IP:192.168.1.110.
+ </div>
+ <div class="state-overview clearfix">
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                      <a href="#" title="商城会员">
+                          <div class="symbol terques">
+                             <i class="icon-user"></i>
+                          </div>
+                          <div class="value">
+                              <h1>34522</h1>
+                              <p>客户总数</p>
+                          </div>
+                          </a>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol red">
+                              <i class="icon-tags"></i>
+                          </div>
+                          <div class="value">
+                              <h1>140</h1>
+                              <p>库存总数</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol yellow">
+                              <i class="icon-shopping-cart"></i>
+                          </div>
+                          <div class="value">
+                              <h1>345</h1>
+                              <p>订单总数</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol blue">
+                              <i class="icon-bar-chart"></i>
+                          </div>
+                          <div class="value">
+                              <h1>￥34,500</h1>
+                              <p>交易总额</p>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+							<div class="index-path">
+					      <div class="path-item">
+					        <div>
+					          <a ui-sref="reception-edit" href="#/reception-edit/">
+					            <button class="gradient-button">
+					              <span>开单</span>
+					            </button>
+					          </a>
+					        </div>
+					        <div class="path-arr"></div>
+					        <div>
+					          <p>
+					            今日开单<span class="m-c ng-binding">0</span>
+					          </p>
+					        </div>
+					      </div>
+					      <div class="path-item">
+					        <div>
+					          <a ng-click="goState('reception-list',{},'3')">
+					            <button class="gradient-button">
+					              <span>报价</span>
+					            </button>
+					          </a>
+					        </div>
+					        <div class="path-arr"></div>
+					        <div>
+					          <p>
+					            服务中<span class="m-c ng-binding">1</span>
+					            <br>
+					            <!-- ngIf: m.servicing.total --><span class="m-c ng-binding ng-scope" ng-if="m.servicing.total">￥108.00</span><!-- end ngIf: m.servicing.total -->
+					          </p>
+					        </div>
+					      </div>
+					      <div class="path-item">
+					        <div>
+					          <a ng-click="goState('pick-await',{},'139')">
+					            <button class="gradient-button">
+					              <span>领料</span>
+					            </button>
+					          </a>
+					        </div>
+					        <div class="path-arr"></div>
+					        <div>
+					          <p>
+					            待领料<span class="m-c ng-binding">0</span>
+					          </p>
+					        </div>
+					      </div>
+					      <div class="path-item">
+					        <div>
+					          <a ng-click="goState('reception-list',{state:2}, '3')">
+					            <button class="gradient-button">
+					              <span>结账</span>
+					            </button>
+					          </a>
+					        </div>
+					        <div class="path-arr"></div>
+					        <div>
+					          <p>
+					            待结账<span class="m-c ng-binding">0</span>
+					            <br>
+					            <!-- ngIf: m.toPay.total -->
+					          </p>
+					        </div>
+					      </div>
+					      <div class="path-item">
+					        <div>
+					          <a ng-click="goState('reception-list', {state:1}, '3')">
+					            <button class="gradient-button">
+					              <span>已提车</span>
+					            </button>
+					          </a>
+					        </div>
+					        <div>
+					          <p>
+					            今日提车<span class="m-c ng-binding">0</span>
+					            <br>
+					            <!-- ngIf: m.todayFinish.total -->
+					          </p>
+					        </div>
+					      </div>
+					      <div class="path-item">
+					        <div class="path-arr02"></div>
+					      </div>
+					      <div class="path-item">
+					        <div>
+					          <a ng-click="goState('purchase.await',{},'133')">
+					            <button class="gradient-button">
+					              <span>采购</span>
+					            </button>
+					          </a>
+					        </div>
+					        <div class="path-arr"></div>
+					        <div>
+					          <p>
+					            待采购<span class="m-c ng-binding">0</span>
+					          </p>
+					        </div>
+					      </div>
+					      <div class="path-item">
+					        <div>
+					          <a ng-click="goState('in-await',{}, '136')">
+					            <button class="gradient-button">
+					              <span>入库</span>
+					            </button>
+					          </a>
+					        </div>
+					        <div class="path-arr"></div>
+					        <div>
+					          <p>
+					            待入库<span class="m-c ng-binding">0</span>
+					          </p>
+					        </div>
+					      </div>
+					      <div class="path-item">
+					        <div>
+					          <a ng-click="goState('inventory-summary',{}, '131')">
+					            <button class="gradient-button">
+					              <span>仓库</span>
+					            </button>
+					          </a>
+					        </div>
+					      </div>
+					    </div>
+             <!--实时交易记录-->
+             <div class="record clearfix">
+             <div class="t_Record">
+               <div id="main" style="height:300px; overflow:hidden; width:100%; overflow:auto" ></div>
+              </div>
+         <div class="news_style">
+          <div class="title_name">最新消息</div>
+          <ul class="list">
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+           <li><i class="icon-bell red"></i><a href="#">6月共处理订单3451比，作废为...</a></li>
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+          </ul>
+         </div>
+         </div>
+
+<script type="text/javascript">
+     $(document).ready(function(){
+
+		  $(".t_Record").width($(window).width()-320);
+		  //当文档窗口发生改变时 触发
+    $(window).resize(function(){
+		 $(".t_Record").width($(window).width()-320);
+		});
+ });
+
+
+        require.config({
+            paths: {
+                echarts: './assets/dist'
+            }
+        });
+        require(
+            [
+                'echarts',
+				'echarts/theme/macarons',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts/chart/bar'
+            ],
+            function (ec,theme) {
+                var myChart = ec.init(document.getElementById('main'),theme);
+               option = {
+    title : {
+        text: '月订单交易记录',
+        subtext: '实时获取客户订单交易记录'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['所有订单','待付款','已付款','代发货']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'所有订单',
+            type:'bar',
+            data:[120, 49, 70, 232, 256, 767, 1356, 1622, 326, 200,164, 133],
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            }
+        },
+        {
+            name:'待付款',
+            type:'bar',
+            data:[26, 59, 30, 84, 27, 77, 176, 1182, 487, 188, 60, 23],
+            markPoint : {
+                data : [
+                    {name : '年最高', value : 1182, xAxis: 7, yAxis: 1182, symbolSize:18},
+                    {name : '年最低', value : 23, xAxis: 11, yAxis: 3}
+                ]
+            },
+
+
+        }
+		, {
+            name:'已付款',
+            type:'bar',
+            data:[26, 59, 60, 264, 287, 77, 176, 122, 247, 148, 60, 23],
+            markPoint : {
+                data : [
+                    {name : '年最高', value : 172, xAxis: 7, yAxis: 172, symbolSize:18},
+                    {name : '年最低', value : 23, xAxis: 11, yAxis: 3}
+                ]
+            },
+
+		}
+		, {
+            name:'代发货',
+            type:'bar',
+            data:[26, 59, 80, 24, 87, 70, 175, 1072, 48, 18, 69, 63],
+            markPoint : {
+                data : [
+                    {name : '年最高', value : 1072, xAxis: 7, yAxis: 1072, symbolSize:18},
+                    {name : '年最低', value : 22, xAxis: 11, yAxis: 3}
+                ]
+            },
+
+		}
+    ]
+};
+
+                myChart.setOption(option);
+            }
+        );
+    </script>
+     </div>
+</body>
+</html>
